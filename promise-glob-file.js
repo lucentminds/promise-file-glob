@@ -10,7 +10,6 @@
 /* jslint node: true */
 
 var glob = require( 'glob' );
-var resolvePath = require( 'promise-resolve-path' );
 var Q = require( 'q' );
 
 var resolveGlob = module.exports = function( patterns, lExists ){// jshint ignore:line
@@ -56,12 +55,8 @@ var resolveGlob = module.exports = function( patterns, lExists ){// jshint ignor
             aGlobs = aGlobs.concat( aGlobbed[ i ] );
         }// /for()
 
-
-        return resolvePath( aGlobs );
-    })
-    .then( function( aResolved ){
         // All resolved.
-        deferred.resolve( aResolved );
+        deferred.resolve( aGlobs );
     })
     .fail( function( err ){            
         // One rejected.
