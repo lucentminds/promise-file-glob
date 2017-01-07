@@ -1,10 +1,13 @@
 {
-	"name": "promise-resolve-path",
-	"date": "01-05-2017",
-	"description": "NodeJs module that resolves a file path or a list of file paths.",
-	"main": "promise-resolve-path.js",
+	"name": "promise-glob-file",
+	"date": "01-07-2017",
+	"description": "NodeJs module that resolves a glob file path or a list of glob file paths.",
+	"main": "promise-glob-file.js",
 	"author": {
 		"name": "Scott Johnson"
+	},
+	"scripts": {
+		"test1": "node test/glob-test.js"
 	},
 	"license": "MIT",
 	"version": "0.0.1",
@@ -13,9 +16,11 @@
 	},
 	"repository":{
 		"type": "git",
-		"url": "https://github.com/lucentminds/promise-resolve-path.git"
+		"url": "https://github.com/lucentminds/promise-glob-file.git"
 	},
 	"dependencies": {
-		"q": ">=1.4.1"
+		"q": ">=1.4.1",
+		"glob": "^7.1.1",
+		"promise-resolve-path": "git+https://github.com/lucentminds/promise-resolve-path.git"
 	}
 }

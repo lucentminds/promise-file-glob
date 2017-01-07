@@ -1,10 +1,10 @@
-# promise-resolve-path
-NodeJs module that resolves a file path or a list of file paths.
+# promise-glob-file
+NodeJs module that resolves a glob file path or a list of glob file paths.
 
 ### Useage:
 
 ```js
-var resolvePath = require( 'promise-resolve-path' );
+var glob = require( 'promise-glob-file' );
 
 var aPaths = [
     '.',
@@ -12,10 +12,10 @@ var aPaths = [
     './documents/test.txt'
 ];
 
-resolve( aPaths, true )
+glob( ['**/*.js"' '**/*.md'] )
 .then(function( aResolved ){
 
-    console.log( 'All paths resolved!' );
+    console.log( 'All files resolved!' );
 
 })
 .fail(function( err ){
@@ -25,13 +25,13 @@ resolve( aPaths, true )
 });
 ```
 
-Or for a single file.
+Or for a single glob.
 
 ```js
-resolve( './documents/test.txt', true )
-.then(function( cResolved ){
+glob( '**/*.js"', true )
+.then(function( aResolved ){
 
-    console.log( 'Resolved path:', cResolved );
+    console.log( 'All files resolved!' );
 
 })
 .fail(function( err ){
