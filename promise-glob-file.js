@@ -12,11 +12,13 @@
 var glob = require( 'glob' );
 var Q = require( 'q' );
 
-var resolveGlob = module.exports = function( patterns, lExists ){// jshint ignore:line
+var resolveGlob = module.exports = function( patterns, oOptions ){// jshint ignore:line
     var deferred = Q.defer();
     var i, l;
     var aPatterns;
     var aPromises;
+
+    oOptions = oOptions || {};
 
     switch( true ) {
     case ( typeof patterns === 'string' ):
@@ -41,7 +43,7 @@ var resolveGlob = module.exports = function( patterns, lExists ){// jshint ignor
      * Loop over each source path and resolve it.
      */
     for( i = 0, l = aPatterns.length; i < l; i++ ) {
-        aPromises.push( globOnePath( aPatterns[ i ] ) );
+        aPromises.push( globOnePath( aPatterns[ i ], oOptions ) );
     }// /for()
 
     // Either wait for all paths to be resolved or reject one.
@@ -70,10 +72,10 @@ var resolveGlob = module.exports = function( patterns, lExists ){// jshint ignor
 /** 
  * This function asychronously resolves one path string.
  */
-var globOnePath = function( cPattern ) {
+var globOnePath = function( cPattern, oOptions ) {
     var deferred = Q.defer();
 
-    glob( cPattern, {}, function( err, aFiles ){
+    glob( cPattern, oOptions, function( err, aFiles ){
         if( err ) {
             return deferred.reject( err );
         }
