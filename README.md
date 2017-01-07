@@ -13,9 +13,9 @@ var aPaths = [
 ];
 
 glob( ['**/*.js"', '**/*.md'] )
-.then(function( aResolved ){
+.then(function( aGlobbed ){
 
-    console.log( 'All files resolved!' );
+    console.log( 'All files globbed!' );
 
 })
 .fail(function( err ){
@@ -29,9 +29,9 @@ Or for a single glob.
 
 ```js
 glob( '**/*.js"', true )
-.then(function( aResolved ){
+.then(function( aGlobbed ){
 
-    console.log( 'All files resolved!' );
+    console.log( 'All files globbed!' );
 
 })
 .fail(function( err ){
