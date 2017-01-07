@@ -1,5 +1,5 @@
 # promise-glob-file
-NodeJs module that resolves a glob file path or a list of glob file paths.
+NodeJs module that resolves a glob string or a list of glob strings.
 
 ### Useage:
 
@@ -28,7 +28,7 @@ glob( ['**/*.js"', '**/*.md'] )
 Or for a single glob.
 
 ```js
-glob( '**/*.js"', true )
+glob( '**/*.js', true )
 .then(function( aGlobbed ){
 
     console.log( 'All files globbed!' );
