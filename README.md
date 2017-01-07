@@ -12,7 +12,7 @@ var aPaths = [
     './documents/test.txt'
 ];
 
-glob( ['**/*.js"' '**/*.md'] )
+glob( ['**/*.js"', '**/*.md'] )
 .then(function( aResolved ){
 
     console.log( 'All files resolved!' );
