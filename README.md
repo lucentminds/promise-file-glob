@@ -1,10 +1,18 @@
-# promise-glob-file
+# promise-file-glob
 NodeJs module that resolves a glob string or a list of glob strings.
+
+## Installation
+
+Install by npm.
+
+```js
+npm install git+https://github.com/lucentminds/promise-file-glob.git
+```
 
 ### Useage:
 
 ```js
-var glob = require( 'promise-glob-file' );
+var glob = require( 'promise-file-glob' );
 
 var aPaths = [
     '.',

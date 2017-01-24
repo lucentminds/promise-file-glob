@@ -1,6 +1,6 @@
 /**
  * 01-04-2017
- * The best app ever..
+ * NodeJs module that resolves a glob file path or a list of glob file paths.
  * ~~ Scott Johnson
  */
 

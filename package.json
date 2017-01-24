@@ -1,8 +1,8 @@
 {
-	"name": "promise-glob-file",
+	"name": "promise-file-glob",
 	"date": "01-07-2017",
 	"description": "NodeJs module that resolves a glob file path or a list of glob file paths.",
-	"main": "promise-glob-file.js",
+	"main": "promise-file-glob.js",
 	"author": {
 		"name": "Scott Johnson"
 	},
@@ -16,7 +16,7 @@
 	},
 	"repository":{
 		"type": "git",
-		"url": "https://github.com/lucentminds/promise-glob-file.git"
+		"url": "https://github.com/lucentminds/promise-file-glob.git"
 	},
 	"dependencies": {
 		"q": ">=1.4.1",
