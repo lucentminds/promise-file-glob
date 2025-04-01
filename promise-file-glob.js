@@ -10,10 +10,9 @@
 /* jslint node: true */
 
 var glob = require( 'glob' );
-var Q = require( 'q' );
 
-var resolveGlob = module.exports = function( patterns, oOptions ){// jshint ignore:line
-    var deferred = Q.defer();
+function resolveGlob( patterns, oOptions ){// jshint ignore:line
+    var deferred = deferred();
     var i, l;
     var aPatterns;
     var aPromises;
@@ -67,13 +66,13 @@ var resolveGlob = module.exports = function( patterns, oOptions ){// jshint igno
 
 
     return deferred.promise;
-};// /glob`()
+};// /glob()
 
 /** 
  * This function asychronously resolves one path string.
  */
-var globOnePath = function( cPattern, oOptions ) {
-    var deferred = Q.defer();
+function globOnePath( cPattern, oOptions ) {
+    var deferred = deferred();
 
     glob( cPattern, oOptions, function( err, aFiles ){
         if( err ) {
@@ -85,3 +84,20 @@ var globOnePath = function( cPattern, oOptions ) {
 
     return deferred.promise;
 };// /globOnePath()
+
+function deferred(){
+    let resolve, reject;
+    const o_promise = new Promise((res, rej) => {
+        resolve = res;
+        reject = rej;
+    });
+    const o_deferred = {
+        promise: o_promise,
+        resolve: resolve,
+        reject: reject
+    };
+
+    return o_deferred;
+}// /deferred()
+
+module.exports = resolveGlob

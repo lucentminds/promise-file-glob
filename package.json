@@ -11,16 +11,15 @@
 	},
 	"license": "MIT",
 	"version": "0.0.1",
-	"engines" : { 
-		"node" : ">=4.0.0" 
+	"engines": {
+		"node": ">=4.0.0"
 	},
-	"repository":{
+	"repository": {
 		"type": "git",
 		"url": "https://github.com/lucentminds/promise-file-glob.git"
 	},
 	"dependencies": {
-		"q": ">=1.4.1",
-		"glob": "^7.1.1",
+		"glob": "^11.0.1",
 		"promise-resolve-path": "git+https://github.com/lucentminds/promise-resolve-path.git"
 	}
 }
