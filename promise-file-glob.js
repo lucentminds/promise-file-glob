@@ -12,7 +12,7 @@
 var glob = require( 'glob' );
 
 function resolveGlob( patterns, oOptions ){// jshint ignore:line
-    var deferred = deferred();
+    var deferred = defer();
     var i, l;
     var aPatterns;
     var aPromises;
@@ -72,7 +72,7 @@ function resolveGlob( patterns, oOptions ){// jshint ignore:line
  * This function asychronously resolves one path string.
  */
 function globOnePath( cPattern, oOptions ) {
-    var deferred = deferred();
+    var deferred = defer();
 
     glob( cPattern, oOptions, function( err, aFiles ){
         if( err ) {
@@ -85,7 +85,7 @@ function globOnePath( cPattern, oOptions ) {
     return deferred.promise;
 };// /globOnePath()
 
-function deferred(){
+function defer(){
     let resolve, reject;
     const o_promise = new Promise((res, rej) => {
         resolve = res;
@@ -98,6 +98,6 @@ function deferred(){
     };
 
     return o_deferred;
-}// /deferred()
+}// /defer()
 
 module.exports = resolveGlob
