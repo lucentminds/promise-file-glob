@@ -11,22 +11,22 @@
 
 const {glob} = require( 'glob' );
 
-function resolveGlob( patterns, oOptions ){// jshint ignore:line
-    var deferred = defer();
+async function resolve_glob( patterns, o_options ){// jshint ignore:line
+    const deferred = defer();
     var i, l;
-    var aPatterns;
-    var aPromises;
+    var a_patterns;
+    var a_promises;
 
-    oOptions = oOptions || {};
+    o_options = o_options || {};
 
     switch( true ) {
     case ( typeof patterns === 'string' ):
-        aPatterns = [patterns];
+        a_patterns = [patterns];
         break;
 
     case Array.isArray( patterns ):
         // Determines a clone of the original array.
-        aPatterns = patterns.slice( 0 );
+        a_patterns = patterns.slice( 0 );
         break;
 
     default:
@@ -36,33 +36,34 @@ function resolveGlob( patterns, oOptions ){// jshint ignore:line
     }// /switch()
 
     // Determines the list of promises received from resolveOnePath.
-    aPromises = [];
+    a_promises = [];
 
     /** 
      * Loop over each source path and resolve it.
      */
-    for( i = 0, l = aPatterns.length; i < l; i++ ) {
-        aPromises.push( globOnePath( aPatterns[ i ], oOptions ) );
+    for( i = 0, l = a_patterns.length; i < l; i++ ) {
+        a_promises.push( globOnePath( a_patterns[ i ], o_options ) );
     }// /for()
 
     // Either wait for all paths to be resolved or reject one.
-    Promise.all( aPromises )
-    .then( function( aGlobbed ){
+    try{
+        const a_globbed = await Promise.all( a_promises );
+
         // All globbed.
-        var i, l, aGlobs = [];
+        var i, l, a_globs = [];
 
         // Loop over each glob array.
-        for( i = 0, l = aGlobbed.length; i < l; i++ ) {
-            aGlobs = aGlobs.concat( aGlobbed[ i ] );
+        for( i = 0, l = a_globbed.length; i < l; i++ ) {
+            a_globs = a_globs.concat( a_globbed[ i ] );
         }// /for()
 
         // All resolved.
-        deferred.resolve( aGlobs );
-    })
-    .catch( function( err ){
+        deferred.resolve( a_globs );
+    }
+    catch( err ){
         // One rejected.
         deferred.reject( err );
-    });
+    }
 
 
     return deferred.promise;
@@ -71,18 +72,10 @@ function resolveGlob( patterns, oOptions ){// jshint ignore:line
 /** 
  * This function asychronously resolves one path string.
  */
-function globOnePath( cPattern, oOptions ) {
-    var deferred = defer();
+async function globOnePath( c_pattern, o_options ) {
+    const a_files = await glob( c_pattern, o_options );
 
-    glob( cPattern, oOptions, function( err, aFiles ){
-        if( err ) {
-            return deferred.reject( err );
-        }
-    
-        deferred.resolve( aFiles );
-    });
-
-    return deferred.promise;
+    return a_files;
 };// /globOnePath()
 
 function defer(){
@@ -94,10 +87,10 @@ function defer(){
     const o_deferred = {
         promise: o_promise,
         resolve: resolve,
-        reject: reject
+        reject: reject,
     };
 
     return o_deferred;
 }// /defer()
 
-module.exports = resolveGlob
+module.exports = resolve_glob;
