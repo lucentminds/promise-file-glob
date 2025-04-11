@@ -9,7 +9,7 @@
 /* jshint undef: true, unused: true */
 /* jslint node: true */
 
-var glob = require( 'glob' );
+const {glob} = require( 'glob' );
 
 function resolveGlob( patterns, oOptions ){// jshint ignore:line
     var deferred = defer();
@@ -46,7 +46,7 @@ function resolveGlob( patterns, oOptions ){// jshint ignore:line
     }// /for()
 
     // Either wait for all paths to be resolved or reject one.
-    Q.all( aPromises )
+    Promise.all( aPromises )
     .then( function( aGlobbed ){
         // All globbed.
         var i, l, aGlobs = [];
@@ -59,7 +59,7 @@ function resolveGlob( patterns, oOptions ){// jshint ignore:line
         // All resolved.
         deferred.resolve( aGlobs );
     })
-    .fail( function( err ){            
+    .catch( function( err ){
         // One rejected.
         deferred.reject( err );
     });
